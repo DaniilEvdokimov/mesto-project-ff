@@ -1,5 +1,7 @@
 import { initialCards } from './cards.js';
 
+import "../index.css";
+
 // Темплейт карточки
 const cardTemplate = document.querySelector('#card-template').content;
 
