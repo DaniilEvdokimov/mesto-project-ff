@@ -2,10 +2,10 @@ import "./pages/index.css";
 import { openPopup, closePopup } from "./components/modal.js";
 import { createCard, putLike } from "./components/card.js";
 import {
-  validationConfig,
   enableValidation,
   clearValidation,
 } from "./components/validation.js";
+import { validationConfig } from "./components/validation-config"
 import {
   getUser,
   getInitialCards,
@@ -180,7 +180,7 @@ popupAddElement.addEventListener("click", () => {
   openPopup(popupAddContent);
 });
 
-// UX
+//UX
 const loading = (button, isLoading) => {
   button.textContent = isLoading ? "Сохранение..." : "Сохранить";
 }

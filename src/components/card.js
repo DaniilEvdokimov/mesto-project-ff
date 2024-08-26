@@ -5,25 +5,14 @@ export function putLike(
   deleteLikeCard,
   addLikeCard
 ) {
-  if (likeButton.classList.contains("card__like-button_is-active")) {
-    deleteLikeCard(item._id)
+  const isLiked = likeButton.classList.contains("card__like-button_is-active");
+  const likeMethod = isLiked ? deleteLikeCard : addLikeCard;
+  likeMethod(item._id)
       .then((res) => {
         likeCounter.textContent = res.likes.length;
-        likeButton.classList.remove("card__like-button_is-active");
+        likeButton.classList.toggle("card__like-button_is-active");
       })
-      .catch((err) => {
-        console.error("Произошла ошибка при удалении лайка:", err);
-      });
-  } else {
-    addLikeCard(item._id)
-      .then((res) => {
-        likeButton.classList.add("card__like-button_is-active");
-        likeCounter.textContent = res.likes.length;
-      })
-      .catch((err) => {
-        console.error("Произошла ошибка при добавлении лайка:", err);
-      });
-  }
+      .catch(err => console.error(`Произошла ошибка при ${isLiked ? 'удалении' : 'добавлении'} лайка:`, err));
 }
 
 export function createCard(item, callbacksObject, userId) {
@@ -48,12 +37,10 @@ export function createCard(item, callbacksObject, userId) {
   cardImage.alt = item.name;
   likeCounter.textContent = item.likes.length;
 
-  let isLike = item.likes.some((likeItem) => likeItem._id === userId);
+  const isLike = item.likes.some((likeItem) => likeItem._id === userId);
 
   if (isLike) {
     likeButton.classList.add("card__like-button_is-active");
-  } else {
-    likeButton.classList.remove("card__like-button_is-active");
   }
 
   // basket

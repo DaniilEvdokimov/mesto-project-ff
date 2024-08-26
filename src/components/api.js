@@ -19,9 +19,6 @@ export const getInitialCards = () => {
     headers: config.headers,
   })
   .then(getResponse)
-  .then((data) => {
-    return data;
-  })
 };
 
 // Получить данные о пользователе
@@ -30,9 +27,6 @@ export const getUser = () => {
     headers: config.headers,
   })
     .then(getResponse)
-    .then((data) => {
-      return data;
-    })
 };
 
 // Удаление карточки по идентификатору
@@ -97,13 +91,4 @@ export const patchAvatar = (avatar) => {
     body: JSON.stringify({ avatar: avatar }),
   })
   .then(getResponse)
-};
-
-// ux
-const renderLoading = ({ buttonElement, isLoading }) => {
-  if (isLoading) {
-    buttonElement.textContent = "Сохранение...";
-  } else {
-    buttonElement.textContent = "Сохранить";
-  }
 };
