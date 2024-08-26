@@ -213,15 +213,13 @@ formAvatarElement.addEventListener("submit", (evt) => {
 });
 
 Promise.all([getUser(), getInitialCards()])
-  .then((result) => {
-    const user = result[0];
-    userId = user._id;
-    const cards = result[1];
-    updateProfileData(user);
-    renderCards(cards, callbacksObject, user._id);
-  })
-  .catch((err) => {
-    console.error("Произошла ошибка при получении данных:", err);
-  });
+    .then(([user, cards]) => {
+      const userId = user._id;
+      updateProfileData(user);
+      renderCards(cards, callbacksObject, user._id);
+    })
+    .catch((err) => {
+      console.error("Произошла ошибка при получении данных:", err);
+    });
 
 enableValidation(validationConfig);
